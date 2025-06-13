@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Ihsan Nurhadi | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .section {
+            scroll-margin-top: 80px;
+        }
+        
+        .gradient-text {
+            background-image: linear-gradient(45deg, #4F46E5, #10B981);
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slide-up {
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 1s ease, opacity 1s ease;
+        }
+
+        .slide-down {
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: transform 1s ease, opacity 1s ease;
+        }
+         /* Projects Section Styles */
+        #projects {
+            position: relative;
+        }
+
+        .color-container {
+            border-color: rgb(163, 163, 163);
+            background: rgb(250, 250, 250);
+        }
+
+        .project-img {
+            border-radius: 2rem;
+            width: 500px;
+            height: 300px;
+        }
+
+        .project-title {
+            margin: 1rem;
+            color: black;
+        }
+
+        .article-container {
+            display: flex;
+            text-align: initial;
+            flex-wrap: wrap;
+            flex-direction: row;
+            gap: 2.5rem;
+            justify-content: space-around;
+        }
+
+
+        .details-container {
+            padding: 1.5rem;
+            flex: 1;
+            background: white;
+            border-radius: 2rem;
+            border: rgb(53, 53, 53) 0.1rem solid;
+            border-color: rgb(163, 163, 163);
+            text-align: center;
+        }
+        .about-containers {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .about-containers {
+                grid-template-columns: 1fr; /* 1 kolom di layar kecil */
+            }
+        }
+
+        .section__text__p1 {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background-image: linear-gradient(45deg, #4F46E5, #10B981);
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 30px;
+        }
+
+        .btn-container {
+            margin-top: 1rem;
+        }
+
+        .project-btn {
+            padding: 10px 20px;
+            background-color: #4F46E5;
+            color: white;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .project-btn:hover {
+            background-color: #10B981;
+        }
+        /* Apply the animation when in view */
+        .in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #4F46E5;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 8px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #4F46E5;
+            border: 3px solid white;
+        }
+
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #E5E7EB;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Header/Navigation -->
+    <header class="fixed w-full bg-white shadow-sm z-50">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold gradient-text">Ihsan Nurhadi</a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-gray-700 hover:text-indigo-600">Home</a>
+                <a href="#about" class="nav-link text-gray-700 hover:text-indigo-600">About</a>
+                <a href="#education" class="nav-link text-gray-700 hover:text-indigo-600">Education</a>
+                <a href="#skills" class="nav-link text-gray-700 hover:text-indigo-600">Skills</a>
+                <a href="#experience" class="nav-link text-gray-700 hover:text-indigo-600">Experience</a>
+                <a href="#contact" class="nav-link text-gray-700 hover:text-indigo-600">Contact</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white pb-4 px-6">
+            <div class="flex flex-col space-y-3">
+                <a href="#home" class="text-gray-700 hover:text-indigo-600 py-1">Home</a>
+                <a href="#about" class="text-gray-700 hover:text-indigo-600 py-1">About</a>
+                <a href="#education" class="text-gray-700 hover:text-indigo-600 py-1">Education</a>
+                <a href="#skills" class="text-gray-700 hover:text-indigo-600 py-1">Skills</a>
+                <a href="#experience" class="text-gray-700 hover:text-indigo-600 py-1">Experience</a>
+                <a href="#contact" class="text-gray-700 hover:text-indigo-600 py-1">Contact</a>
+            </div>
+        </div>
+    </header>
+    <!-- Sections with animations -->
+    <section id="home" class="section pt-24 md:pt-32 pb-16 bg-gradient-to-r from-indigo-50 to-emerald-50 fade-in">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Hi, I'm <span class="gradient-text">Muhammad Ihsan Nurhadi</span></h1>
+                <h2 class="text-2xl md:text-3xl text-gray-600 mb-6">Software Engineer</h2>
+                <p class="text-gray-600 mb-8">Passionate about building web applications with clean code and great user experiences.</p>
+                <div class="flex space-x-4">
+                    <a href="#contact" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-full transition duration-300">Hire Me</a>
+                    <a href="#about" class="border border-indigo-600 text-indigo-600 hover:bg-indigo-50 px-6 py-3 rounded-full transition duration-300">Learn More</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl">
+                    <img src="assets/photo-profile.png" alt="Ihsan Nurhadi" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-indigo-100 opacity-20"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section py-16 bg-white slide-up">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">About <span class="gradient-text">Me</span></h2>
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/3 mb-8 md:mb-0 flex justify-center">
+                    <div class="w-64 h-64 rounded-full overflow-hidden border-4 border-indigo-100 shadow-lg">
+                        <img src="assets/about-pic2.jpg" alt="Ihsan Nurhadi" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="md:w-2/3 md:pl-12">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Who am I?</h3>
+                    <p class="text-gray-600 mb-6">
+                        I'm Muhammad Ihsan Nurhadi, a 6th semester student from Persada Indonesia YAI University, majoring in Information Systems, class of 2021, with the latest GPA of 3.96. I have a high enthusiasm in the field of software development and information systems.
+                    </p>
+                    <p class="text-gray-600 mb-6">
+                        I'm looking for new challenges with critical thinking skills, leadership spirit, and cooperativeness. Currently learning about web development, databases, data analysis, and data mining. I'm particularly interested in Web Programming and databases, and I hope to get the opportunity to contribute to a company to gain relevant experience.
+                    </p>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope text-indigo-600 mr-2"></i>
+                            <span class="text-gray-700">nurhadimuhammad216@gmail.com</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone text-indigo-600 mr-2"></i>
+                            <span class="text-gray-700">089671239314</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-indigo-600 mr-2"></i>
+                            <span class="text-gray-700">Jl. Kesatrian VA rt 28 rw 03 no.23</span>
+                        </div>
+                    </div>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="https://github.com/Ihsan-Nurhadi" class="text-gray-700 hover:text-indigo-600" target="_blank">
+                            <i class="fab fa-github text-2xl"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/muhammad-ihsan-nurhadi-304178349" class="text-gray-700 hover:text-indigo-600" target="_blank">
+                            <i class="fab fa-linkedin text-2xl"></i>
+                        </a>
+                        <a href="https://ihsan-nurhadi.github.io/portofolio/" class="text-gray-700 hover:text-indigo-600" target="_blank">
+                            <i class="fas fa-globe text-2xl"></i>
+                        </a>
+                        <button
+                            class="btn btn-color-2 text-sm px-4 py-2 rounded-md border border-indigo-600 text-indigo-600 hover:bg-indigo-100 transition"
+                            onclick="window.open('./assets/CV-MuhamadIhsanNurhadi.pdf')"
+                            >
+                            Download CV
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="section py-16 bg-gray-50 slide-down">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">My <span class="gradient-text">Education</span></h2>
+            
+            <div class="relative max-w-2xl mx-auto">
+                <!-- Timeline line -->
+                <div class="timeline-line absolute left-8 top-0 bottom-0 md:left-1/2"></div>
+                
+                <!-- Timeline items -->
+                <div class="space-y-8">
+                    <!-- Item 1 -->
+                    <div class="relative pl-16 md:pl-0 md:flex justify-between items-center">
+                        <div class="md:w-5/12 md:pr-8 md:text-right mb-4 md:mb-0">
+                            <h3 class="text-xl font-semibold text-gray-800">Bachelor in Information Systems</h3>
+                            <p class="text-gray-600">Persada Indonesia University</p>
+                            <p class="text-sm text-indigo-600">2021 – Present</p>
+                        </div>
+                        <div class="md:w-5/12 bg-white p-6 rounded-lg shadow-md timeline-item">
+                            <p class="font-medium mb-2">GPA: 3.96 / 4.00</p>
+                            <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                                <li>Web Information Retrieval Project Leader</li>
+                                <li>Relevant courses: Web Programming, Database, Business Intelligence</li>
+                                <li>Information Security, Data Mining, System Analysis and Design</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 2 -->
+                    <div class="relative pl-16 md:pl-0 md:flex justify-between items-center">
+                        <div class="md:w-5/12 md:order-2 md:pl-8 mb-4 md:mb-0">
+                            <h3 class="text-xl font-semibold text-gray-800">High School in Science</h3>
+                            <p class="text-gray-600">SMAN 21 Jakarta</p>
+                            <p class="text-sm text-indigo-600">2018 – 2021</p>
+                        </div>
+                        <div class="md:w-5/12 bg-white p-6 rounded-lg shadow-md timeline-item md:order-1">
+                            <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                                <li>Member of Object Organization Association, 2018-2019</li>
+                                <li>Subjects: Physics, Chemistry, Biology, Specialized Mathematics</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section py-16 bg-white fade-in">
+                <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">My <span class="gradient-text">Skills</span></h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Hard Skills -->
+                <div class="bg-gray-50 p-8 rounded-xl shadow-sm">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                        <i class="fas fa-laptop-code text-indigo-600 mr-3"></i>
+                        Technical Skills
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-medium text-gray-700 mb-2">HTML, CSS, JavaScript</h4>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-indigo-600 h-2.5 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-700 mb-2">Python, Django</h4>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-indigo-600 h-2.5 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-700 mb-2">Node.js</h4>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-indigo-600 h-2.5 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-700 mb-2">GIT</h4>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-indigo-600 h-2.5 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-700 mb-2">Rapid Miner</h4>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-indigo-600 h-2.5 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Soft Skills -->
+                <div class="bg-gray-50 p-8 rounded-xl shadow-sm">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                        <i class="fas fa-users text-indigo-600 mr-3"></i>
+                        Soft Skills
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-indigo-100 text-indigo-800 rounded-full">Creative</span>
+                        <span class="px-4 py-2 bg-indigo-100 text-indigo-800 rounded-full">Cooperative</span>
+                        <span class="px-4 py-2 bg-indigo-100 text-indigo-800 rounded-full">Flexibility</span>
+                        <span class="px-4 py-2 bg-indigo-100 text-indigo-800 rounded-full">Leadership</span>
+                        <span class="px-4 py-2 bg-indigo-100 text-indigo-800 rounded-full">Critical Thinking</span>
+                        <span class="px-4 py-2 bg-indigo-100 text-indigo-800 rounded-full">Teamwork</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Projects Section -->
+    <section id="projects" class="section py-16 bg-white ">
+        <p class="section__text__p1">Browse My Recent</p>
+        <h1 class="title">Projects</h1>
+        <div class="experience-details-container">
+            <!-- Project 1 -->
+            <div class="about-containers">
+                <div class="details-container color-container fade-in">
+                    <div class="article-container">
+                        <img src="./assets/project1.png" alt="Project 1" class="project-img" />
+                    </div>
+                    <h2 class="experience-sub-title project-title">Eduteach from Educourse</h2>
+                    <div class="btn-container">
+                        <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/Ihsan-Nurhadi/Educourse_Kelompok1Django'">Github</button>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="details-container color-container fade-in">
+                    <div class="article-container">
+                        <img src="./assets/image.png" alt="Project 2" class="project-img" />
+                    </div>
+                    <h2 class="experience-sub-title project-title">Simon Game</h2>
+                    <div class="btn-container">
+                        <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/Ihsan-Nurhadi/Simon_Game'">Github</button>
+                        <button class="btn btn-color-2 project-btn" onclick="location.href='https://ihsan-nurhadi.github.io/Simon_Game/'">Live Demo</button>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="details-container color-container fade-in">
+                    <div class="article-container">
+                        <img src="./assets/projek2.png" alt="Project 3" class="project-img" />
+                    </div>
+                    <h2 class="experience-sub-title project-title">Drum Kit</h2>
+                    <div class="btn-container">
+                        <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/Ihsan-Nurhadi/Drum-Kit'">Github</button>
+                        <button class="btn btn-color-2 project-btn" onclick="location.href='https://ihsan-nurhadi.github.io/Drum-Kit/'">Live Demo</button>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="details-container color-container fade-in">
+                    <div class="article-container">
+                        <img src="./assets/project4.png" alt="Project 3" class="project-img" />
+                    </div>
+                    <h2 class="experience-sub-title project-title">Kalkulator Tematik</h2>
+                    <div class="btn-container">
+                        <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/Ihsan-Nurhadi/Kalkulator-Tematik'">Github</button>
+                        <button class="btn btn-color-2 project-btn" onclick="location.href='https://ihsan-nurhadi.github.io/Kalkulator-Tematik/'">Live Demo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Experience Section -->
+    <section id="experience" class="section py-16 bg-gray-50 ">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Work & <span class="gradient-text">Experience</span></h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Non-formal Education -->
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                        <i class="fas fa-graduation-cap text-indigo-600 mr-3"></i>
+                        Non-Formal Education
+                    </h3>
+                    
+                    <div class="space-y-6">
+                        <!-- MSIB -->
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-semibold text-gray-800">MSIB Studi Independen, PT Maleo Edukasi Teknologi</h4>
+                                <span class="text-sm text-indigo-600">09/2024 – 12/2024</span>
+                            </div>
+                            <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                                <li>Build a functional education website using Python and Django</li>
+                                <li>Learn fullstack programming include HTML, CSS, Javascript, Python and Django</li>
+                                <li>Enhanced competencies in creative thinking, data-driven decision making, and market-centered thinking</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Udemy -->
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-semibold text-gray-800">The Complete 2024 Web Development Bootcamp, Udemy</h4>
+                                <span class="text-sm text-indigo-600">11/2023 – 05/2024</span>
+                            </div>
+                            <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                                <li>Build 7 web development projects for portfolio</li>
+                                <li>Learn the latest technologies, including HTML, CSS, Javascript, React, and Node.js</li>
+                                <li>Learning Git, Github and version Control</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Revou -->
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-semibold text-gray-800">Intro to Data Analyst, Revou</h4>
+                                <span class="text-sm text-indigo-600">03/2025 – 03/2025</span>
+                            </div>
+                            <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                                <li>Completed an intensive 10-day Data Analytics training led by industry experts</li>
+                                <li>Participated in a case study presentation and peer-reviewed analytical solutions</li>
+                                <li>Conducted key metric evaluations and funnel analysis for problem-solving practice</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Organization & Certification -->
+                <div>
+                    <div class="mb-10">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                            <i class="fas fa-sitemap text-indigo-600 mr-3"></i>
+                            Organization
+                        </h3>
+                        
+                        <div class="space-y-6">
+                            <!-- HIMTI -->
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h4 class="font-semibold text-gray-800">Member HIMTI</h4>
+                                    <span class="text-sm text-indigo-600">2021 – 2025</span>
+                                </div>
+                                <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                                    <li>Assisted in organizing a joint breaking of fast event</li>
+                                    <li>Attended a meeting to determine the leader</li>
+                                    <li>Participated in a seminar event with more than 100 attendees</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Community Youth -->
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h4 class="font-semibold text-gray-800">Vice President Community Youth Development</h4>
+                                    <span class="text-sm text-indigo-600">2017 – 2020</span>
+                                </div>
+                                <ul class="text-gray-600 list-disc pl-5 space-y-1">
+                                    <li>Organized a competition for Indonesia's Independence Day</li>
+                                    <li>Collaborated to carry out infrastructure improvements in the surrounding environment</li>
+                                    <li>Listened to community complaints about local issues</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                            <i class="fas fa-certificate text-indigo-600 mr-3"></i>
+                            Certification
+                        </h3>
+                        
+                        <div class="space-y-6">
+                            <!-- Udemy Cert -->
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <h4 class="font-semibold text-gray-800 mb-1">The Complete 2024 Web Development Bootcamp, Udemy</h4>
+                                <p class="text-sm text-gray-500 mb-2">Number: UCa03ad39b-fd56-42d9-8795f263460e25cd, 2024</p>
+                            </div>
+                            
+                            <!-- Kampus Merdeka -->
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <h4 class="font-semibold text-gray-800 mb-1">Kampus Merdeka - Educourse.id</h4>
+                                <p class="text-sm text-gray-500 mb-2">"Platform and Web Developer (Specialist Education Platform) Certified Independent Study Program" Batch 7</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section py-16 bg-white slide-down">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Get In <span class="gradient-text">Touch</span></h2>
+            
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-6">Contact Information</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-indigo-100 p-3 rounded-full">
+                                <i class="fas fa-envelope text-indigo-600"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-gray-500 text-sm">Email</h4>
+                                <p class="text-gray-800">nurhadimuhammad216@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-indigo-100 p-3 rounded-full">
+                                <i class="fas fa-phone text-indigo-600"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-gray-500 text-sm">Phone</h4>
+                                <p class="text-gray-800">089671239314</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-indigo-100 p-3 rounded-full">
+                                <i class="fas fa-map-marker-alt text-indigo-600"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-gray-500 text-sm">Address</h4>
+                                <p class="text-gray-800">Jl. Kesatrian VA rt 28 rw 03 no.23, Jakarta</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Follow Me</h3>
+                        <div class="flex space-x-4">
+                            <a href="https://github.com/Ihsan-Nurhadi" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-indigo-100 hover:text-indigo-600 transition" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://linkedin.com/in/muhammad-ihsan-nurhadi-304178349" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-indigo-100 hover:text-indigo-600 transition" target="_blank">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://ihsan-nurhadi.github.io/portofolio/" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-indigo-100 hover:text-indigo-600 transition" target="_blank">
+                                <i class="fas fa-globe"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2 md:pl-12">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-6">Send Me a Message</h3>
+                    
+                    <form class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-gray-700 mb-1">Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-gray-700 mb-1">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-gray-700 mb-1">Subject</label>
+                            <input type="text" id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-gray-700 mb-1">Message</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-md transition duration-300">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-xl font-bold gradient-text">Muhammad Ihsan Nurhadi</h3>
+                    <p class="text-gray-400 mt-1">Software Engineer</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-6 pt-6 text-center text-gray-400 text-sm">
+                <p>&copy; 2024 Muhammad Ihsan Nurhadi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-indigo-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Intersection Observer to add animation when elements come into view
+        const elements = document.querySelectorAll('.fade-in, .slide-up, .slide-down');
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                } else {
+                    // When it is out of view, remove the class to restart animation
+                    entry.target.classList.remove('in-view');
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+
+        elements.forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>
